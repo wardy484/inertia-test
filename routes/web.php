@@ -11,5 +11,13 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::post('/save', 'HomeController@store')->name('save');
+// Auth::routes();
+Route::get('login')->name('login')->uses('Auth\LoginController@showLoginForm');
+Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login');
+Route::post('logout')->name('logout')->uses('Auth\LoginController@logout');
+
+Route::get('/', 'HomeController@index')
+    ->name('home')
+    ->middleware('auth');
+
+Route::post('/save', 'HomeController@store')->name('home.store')->middleware('auth');

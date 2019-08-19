@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\People;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -16,23 +13,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Home', [
-            'people' => People::all()
-        ]);
+        return Inertia::render('Home');
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
-            'first' => 'required',
-            'last' => 'required'
-        ]);
-
-        People::create([
-            'first_name' => $request->first,
-            'last_name' => $request->last
-        ]);
-
-        return redirect()->route("home");
+        dd("there");
     }
 }
